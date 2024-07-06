@@ -14,6 +14,8 @@ print("""press 1 : for sending the whatsapp nessage.
         press 3 : for generate the qr code.
         press 4  : making the call.
         press 5 : to send the email
+        press 6 : search on the google and got top 5 results
+        press 7 : it speak the text that you enterd
         """)
 
 ch = input("Enter your choice: ")
@@ -121,6 +123,42 @@ elif int(ch) == 5:
     while True:
         schedule.run_pending()
         time.sleep(1)
+
+elif  int(ch) == 6:
+    query = input("Enter the text what you want to search  ::  ")
+
+    results = search(query,num_results = 5)
+
+    for idx,result in enumerate(results,start=1):
+        print(f"{idx}.{result}")
+
+elif int(ch) == 7:
+    # Initialize the text-to-speech engine
+    engine = pyttsx3.init()
+
+    # Define the text you want to be spoken aloud
+    text = input("enter the text that you want to speak  ::  ")
+
+
+    # Get the current speaking rate
+    rate = engine.getProperty('rate')
+    print(f"Current speaking rate: {rate}")
+
+    # Set the speaking rate (default is usually around 200 words per minute)
+    new_rate = 150  # You can adjust this value as needed
+    engine.setProperty('rate', new_rate)
+    print(f"New speaking rate: {new_rate}")
+
+
+    # Use the engine to say the text
+    engine.say(text)
+
+    # Wait for the speech to finish
+    engine.runAndWait()
+
+
+
+
 
 else:
     print("Invalid choice")
